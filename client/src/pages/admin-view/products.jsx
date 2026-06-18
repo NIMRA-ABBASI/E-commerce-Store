@@ -1,24 +1,31 @@
+import ProductImageUpload from "@/components/admin-view/ProductImageUpload";
 import Form from "@/components/common/form";
-import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+} from "@/components/ui/sheet";
 import { addProductFormElements } from "@/config";
 import { Button } from "@base-ui/react";
 import { Fragment, useState } from "react";
-const initialFormData ={
-  title:"",
-  description:"",
-  category:"",
-  brand:"",
-  price:"",
-  salePrice:"",
-  totalStock:""
-}
+const initialFormData = {
+  image: null,
+  title: "",
+  description: "",
+  category: "",
+  brand: "",
+  price: "",
+  salePrice: "",
+  totalStock: "",
+};
 function AdminProducts() {
   const [openCreateProductDialog, setOpenCreateProductDialog] = useState(false);
-  const [formData,setformData]= useState(initialFormData)
-  const handleSubmit =()=>
-  {
+  const [formData, setformData] = useState(initialFormData);
+  const [imageFile, setImageFile] = useState(null);
+  const [uploadedImageUrl, setUploadedImageUrl] = useState("");
 
-  }
+  const handleSubmit = () => {};
   return (
     <Fragment>
       <div className="mb-5 w-full flex justify-end">
@@ -35,13 +42,22 @@ function AdminProducts() {
             <SheetHeader>
               <SheetTitle>Add New Product</SheetTitle>
             </SheetHeader>
+
+            <ProductImageUpload
+              imageFile={imageFile}
+              setImageFile={setImageFile}
+              uploadedImageUrl={uploadedImageUrl}
+              setUploadedImageUrl={setUploadedImageUrl}
+            />
+
             <div className="py-6">
-              <Form 
-              formControls={addProductFormElements}
-              ButtonText="Add"
-              onSubmit={handleSubmit}
-              formData={formData}
-              setFormData={setformData}/>
+              <Form
+                formControls={addProductFormElements}
+                ButtonText="Add"
+                onSubmit={handleSubmit}
+                formData={formData}
+                setFormData={setformData}
+              />
             </div>
           </div>
         </SheetContent>
