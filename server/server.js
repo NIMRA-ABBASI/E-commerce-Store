@@ -2,8 +2,9 @@ import express from "express";
 import connectToDb from "./database/db.js";
 import dotenv from "dotenv";
 import cors from "cors";
-import cookieparse from 'cookie-parser'
-import authRouter from './routes/auth.js'
+import cookieparse from "cookie-parser";
+import authRouter from "./routes/auth.js";
+import productrouter from "./routes/admin/products_routes.js";
 dotenv.config();
 connectToDb();
 
@@ -21,13 +22,13 @@ app.use(
       "Expires",
       "pragma",
     ],
-    credentials:true
+    credentials: true,
   }),
 );
-app.use(cookieparse())
-app.use(express.json())
-app.use('/api/auth',authRouter)
-
+app.use(cookieparse());
+app.use(express.json());
+app.use("/api/auth", authRouter);
+app.use("/api/admin/products", productrouter);
 app.listen(PORT, (req, res) => {
   console.log(`Server run succesfully on port ${PORT}`);
 });

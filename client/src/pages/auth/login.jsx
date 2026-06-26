@@ -25,7 +25,6 @@ function Authlogin() {
           },
         });
       } else {
-        console.log(data)
         toast.error(data?.payload?.message, {
           style: {
             background: "#ef4444", // red-500
