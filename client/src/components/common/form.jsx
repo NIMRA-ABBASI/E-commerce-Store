@@ -73,6 +73,10 @@ function Form({ formControls, ButtonText, onSubmit, formData, setFormData }) {
             placeholder={controlItem.placeholder}
             type={controlItem.type}
             value={value}
+            onChange={(event)=>
+            {
+              setFormData({...formData ,[controlItem.name]: event.target.value })
+            }}
           />
         );
         break;
