@@ -91,7 +91,7 @@ const editProduct = async (req, res) => {
       totalStock,
     } = req.body;
 
-    const productExist = await productModel.findById(productID);
+    let productExist = await productModel.findById(productID);
 
     if (!productExist) {
       res.status(404).json({
@@ -103,13 +103,23 @@ const editProduct = async (req, res) => {
     productExist.description = description || productExist.description;
     productExist.category = category || productExist.category;
     productExist.brand = brand || productExist.brand;
-    productExist.price = price || productExist.price;
-    productExist.salePrice = brand || productExist.salePrice;
-    productExist.totalStock = price || productExist.totalStock;
+    productExist.price = price === "" ? 0 : price || productExist.price;
+    productExist.salePrice =
+      salePrice === "" ? 0 : salePrice || productExist.salePrice;
+    productExist.totalStock = totalStock || productExist.totalStock;
     productExist.image = image || productExist.image;
 
-    const result = productModel.findByIdAndUpdate(productID, productExist, {
-      new: true,
+    const result = await productModel.findByIdAndUpdate(
+      productID,
+      productExist,
+      {
+        new: true,
+      },
+    );
+
+    res.status(200).json({
+      success: true,
+      data: productExist,
     });
   } catch (error) {
     console.log(error);
@@ -123,7 +133,7 @@ const editProduct = async (req, res) => {
 const deleteProduct = async (req, res) => {
   try {
     const id = req.params.id;
-    const product = await Product.findByIdAndDelete(id);
+    const product = await productModel.findByIdAndDelete(id);
 
     if (!product)
       return res.status(404).json({

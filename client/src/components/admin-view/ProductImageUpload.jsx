@@ -10,7 +10,8 @@ function ProductImageUpload({
   uploadedImageUrl,
   setUploadedImageUrl,
   setImageLoadingState,
-  imageLoadingState
+  imageLoadingState,
+  isEditMode
 }) {
   const inputref = useRef(null);
   const handleImageFileChange = (event) => {
@@ -62,7 +63,7 @@ function ProductImageUpload({
       <div
         onDragOver={handleDragOver}
         onDrop={handleDrop}
-        className="border-2 border-dashed rounded-lg p-4"
+        className={`${isEditMode ? "opacity-60" : ""}border-2 border-dashed rounded-lg p-4`}
       >
         <Input
           id="image-upload"
@@ -70,6 +71,7 @@ function ProductImageUpload({
           className="hidden"
           ref={inputref}
           onChange={handleImageFileChange}
+          disabled={isEditMode}
         />
 
         {!imageFile ? (

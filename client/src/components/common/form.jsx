@@ -17,7 +17,7 @@ const types = {
   TEXTAREA: "textarea",
 };
 
-function Form({ formControls, ButtonText, onSubmit, formData, setFormData }) {
+function Form({ formControls, ButtonText, onSubmit, formData, setFormData , isBtnDisabled }) {
   function renderInputsByComponentType(controlItem) {
     let element = "";
     let value = formData[controlItem.name];
@@ -111,7 +111,7 @@ function Form({ formControls, ButtonText, onSubmit, formData, setFormData }) {
           </div>
         ))}
       </div>
-      <Button type="submit" className="mt-2 w-full">
+      <Button disabled={isBtnDisabled} type="submit" className="mt-2 w-full" >
         {ButtonText || "submit"}
       </Button>
     </form>

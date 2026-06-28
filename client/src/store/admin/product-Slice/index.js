@@ -34,7 +34,7 @@ export const editProduct = createAsyncThunk("/product/edit", async ({id,formData
   return response?.data;
 });
 
-export const deleteProduct = createAsyncThunk("/product/delete", async ({id}) => {
+export const deleteProduct = createAsyncThunk("/product/delete", async (id) => {
   const response = await axios.delete(
     `http://localhost:3000/api/admin/products/delete/${id}`,
     {headers: {'Content-Type': 'application/json'}} ,
